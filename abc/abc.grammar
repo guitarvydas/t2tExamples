@@ -2,14 +2,13 @@ ABC {
 TopLevel = Expression
 
   Expression =
-    | ID "=" Expression Expression? -- assignment
+    | variable "=" Expression Expression? -- assignment
     | Expression "+" Expression Expression? -- plus
-    | Atom -- atom
+    | atom -- atom
 
-  Atom = Variable | number
+  atom = variable | number
   
-    Variable = "a" .. "z"
-    ID = Variable
+    variable = "a" .. "z"
     number = dig+
     dig = "0" .. "9"
 }

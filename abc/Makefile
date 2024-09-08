@@ -1,6 +1,5 @@
 t2t = ~/projects/t2t/t2t.mjs
 
-dev: abcmetapy
 
 all : abcjs abccl abcmetajs abcmetapy
 
