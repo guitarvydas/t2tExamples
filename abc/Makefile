@@ -1,4 +1,4 @@
-t2t = ~/projects/t2t/t2t.mjs
+t2t = ~/Documents/projects-icloud/t2t/t2t.mjs
 
 
 all : abcjs abccl abcmetajs abcmetapy
@@ -17,3 +17,6 @@ abcmetapy : abcmeta.grammar abcmetapy.rewrite test.abcmeta ${t2t}
 
 test.abcmeta : abccl
 	node ${t2t} abc.grammar abccl.rewrite test.abc >test.abcmeta
+
+install-js-requires:
+	npm install yargs prompt-sync ohm-js
