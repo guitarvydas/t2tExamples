@@ -1,4 +1,4 @@
-t2t = ~/Documents/projects-icloud/t2t/t2t.mjs
+t2t = ./t2t.mjs
 
 
 all : abcjs abccl abcmetajs abcmetapy
