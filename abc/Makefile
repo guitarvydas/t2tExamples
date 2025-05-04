@@ -1,22 +1,43 @@
 t2t = ./t2t.mjs
 
 
-all : abcjs abccl abcmetajs abcmetapy
+all : abcidentity abcjs abccl abcpy test.abcmeta abcmetajs abcmetapy
 
-abcjs : abc.grammar abcjs.rewrite test.abc ${t2t}
-	node ${t2t} abc.grammar abcjs.rewrite test.abc
+abcjs : abc.ohm abcjs.rwr test.abc ${t2t}
+	@echo 'Javascript'
+	@node ${t2t} abc.ohm abcjs.rwr test.abc
+	@echo
 
-abccl : abc.grammar abccl.rewrite test.abc ${t2t}
-	node ${t2t} abc.grammar abccl.rewrite test.abc
+abccl : abc.ohm abccl.rwr test.abc ${t2t}
+	@echo 'Lisp'
+	@node ${t2t} abc.ohm abccl.rwr test.abc
+	@echo
 
-abcmetajs : abcmeta.grammar abcmetajs.rewrite test.abcmeta ${t2t}
-	node ${t2t} abcmeta.grammar abcmetajs.rewrite test.abcmeta
+abcpy : abc.ohm abcpy.rwr test.abc ${t2t}
+	@echo 'Python'
+	@node ${t2t} abc.ohm abcpy.rwr test.abc
+	@echo
 
-abcmetapy : abcmeta.grammar abcmetapy.rewrite test.abcmeta ${t2t}
-	node ${t2t} abcmeta.grammar abcmetapy.rewrite test.abcmeta
+abcidentity : abc.ohm abcidentity.rwr test.abc ${t2t}
+	@echo 'Identity'
+	@node ${t2t} abc.ohm abcidentity.rwr test.abc
+	@echo
+
+abcmetajs : abcmeta.ohm abcmetajs.rwr test.abcmeta ${t2t}
+	@echo 'Javascript from Meta (test.abcmeta)'
+	@node ${t2t} abcmeta.ohm abcmetajs.rwr test.abcmeta
+	@echo
+
+abcmetapy : abcmeta.ohm abcmetapy.rwr test.abcmeta ${t2t}
+	@echo 'Python from Meta (test.abcmeta)'
+	@node ${t2t} abcmeta.ohm abcmetapy.rwr test.abcmeta
+	@echo
 
 test.abcmeta : abccl
-	node ${t2t} abc.grammar abccl.rewrite test.abc >test.abcmeta
+	@echo 'Meta'
+	@node ${t2t} abc.ohm abccl.rwr test.abc >test.abcmeta
+	@cat test.abcmeta
+	@echo
 
 install-js-requires:
 	npm install yargs prompt-sync ohm-js
